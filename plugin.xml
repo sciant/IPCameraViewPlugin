@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       id="cordova-plugin-ipcamview"
+       version="1.0.0">      
+   <name>IPCamView</name>
+
+   <description>
+       IP camera viewer
+   </description>
+
+   <author>Sciant Ltd.</author>
+   
+   <keywords>rtsp, h.264, ipcam</keywords>
+
+   <asset src="www/ipcamview.js" target="js/ipcamview.js"/>
+   
+   <engines>
+       <engine name="cordova" version=">=3.0.0"/>
+   </engines>
+
+   <js-module src="www/ipcamview.js" name="ipcamview">
+       <clobbers target="ipcamview" />
+   </js-module>
+
+   <!-- android -->
+   <platform name="android">
+       <config-file target="res/xml/config.xml" parent="/*">
+           <feature name="IPCamView">
+               <param name="android-package" value="com.sciant.ipcamplugin.IPCamView" />
+           </feature>
+       </config-file>
+	   
+	   <config-file target="AndroidManifest.xml" parent="/manifest/application">
+           <activity android:name="com.sciant.ipcamplugin.CameraPlayer">
+           </activity>
+       </config-file>
+	   
+	   <config-file target="AndroidManifest.xml" parent="/manifest">
+			<uses-permission android:name="android.permission.INTERNET"/>
+       </config-file>
+	   
+       <source-file src="src/android/src/com/sciant/ipcamplugin/IPCamView.java" target-dir="src/com/sciant/ipcamplugin"/>
+	   <source-file src="src/android/src/com/sciant/ipcamplugin/CameraPlayer.java" target-dir="src/com/sciant/ipcamplugin"/>
+	   <source-file src="src/android/src/com/sciant/ipcamplugin/PlayerStarter.java" target-dir="src/com/sciant/ipcamplugin"/>
+	   <source-file src="src/android/src/com/sciant/ipcamplugin/PlaySurfaceView.java" target-dir="src/com/sciant/ipcamplugin"/>
+	   <source-file src="src/android/src/com/sciant/ipcamplugin/PluginResult.java" target-dir="src/com/sciant/ipcamplugin"/>
+	   
+	   
+	   <source-file src="src/android/res/drawable/cordova_plugin_ipcamview_close_button.png" target-dir="res/drawable/"/>
+	   <source-file src="src/android/res/drawable/cordova_plugin_ipcamview_topheader.xml" target-dir="res/drawable/"/>
+	   
+	   <source-file src="src/android/res/layout/cordova_plugin_ipcamview_ladscape.xml" target-dir="res/layout/"/>
+	   <source-file src="src/android/res/layout/cordova_plugin_ipcamview_portrait.xml" target-dir="res/layout/"/>
+	   
+	   <source-file src="src/android/libs/HCNetSDK.jar" target-dir="libs"/>
+	   <source-file src="src/android/libs/PlayerSDK.jar" target-dir="libs"/>
+	   
+	   <source-file src="src/android/jniLibs/armeabi/libAudioEngine.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCAlarm.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCCoreDevCfg.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCGeneralCfgMgr.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libhcnetsdk.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCPreview.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libjnidispatch.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libPlayCtrl_v5.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libSystemTransform.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libCpuFeatures.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCCore.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCDisplay.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCIndustry.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCPlayBack.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libHCVoiceTalk.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libPlayCtrl.so" target-dir="libs/armeabi/" />
+	   <source-file src="src/android/jniLibs/armeabi/libPlayCtrl_v7.so" target-dir="libs/armeabi/" />
+	   
+	   <!--
+		libAudioEngine.so  libHCAlarm.so  libHCCoreDevCfg.so  libHCGeneralCfgMgr.so  libhcnetsdk.so    libHCPreview.so    libjnidispatch.so  libPlayCtrl_v5.so  libSystemTransform.so
+		libCpuFeatures.so  libHCCore.so   libHCDisplay.so     libHCIndustry.so       libHCPlayBack.so  libHCVoiceTalk.so  libPlayCtrl.so     libPlayCtrl_v7.so
+		-->
+		
+		
+		
+	   <!-- add the otheer source files here -->
+   </platform>      
+  </plugin>      

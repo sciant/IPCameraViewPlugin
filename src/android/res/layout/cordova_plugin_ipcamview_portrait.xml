@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true"
+    >
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#0000ff00">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cordova_plugin_ipcamview_topheader">
+
+            <Button
+                android:id="@+id/closeButton"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:onClick="closeButtonClick"
+
+                android:textColor="#FFFFFF"
+                android:textSize="25sp"
+
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@drawable/cordova_plugin_ipcamview_close_button"
+                android:shadowColor="#2E2E2E"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="1"
+                />
+            <SurfaceView
+                android:id="@+id/surfaceView"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#0000ff00"
+                android:layout_below="@+id/closeButton" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</ScrollView>
