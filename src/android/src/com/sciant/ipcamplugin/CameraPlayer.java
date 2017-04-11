@@ -69,6 +69,13 @@ public class CameraPlayer extends Activity {
         stop();
     }
 
+    @Override
+    protected void onStop(){
+        PluginResult.success();
+        super.onStop();
+        Log.d(TAG,"onStop triggered");
+    }
+
     public boolean isReady() {
         if (m_osurfaceView == null || m_osurfaceView.getHolder() == null ||
                 m_osurfaceView.getHolder().getSurface() == null) {
@@ -162,8 +169,6 @@ public class CameraPlayer extends Activity {
                     + HCNetSDK.getInstance().NET_DVR_GetLastError());
             return;
         }
-
-        PluginResult.success();
         Log.d(TAG,"NetSdk Play success!!!");
 
     }
@@ -187,8 +192,6 @@ public class CameraPlayer extends Activity {
             playView[i].startPreview(m_iLogID, m_iStartChan + i);
         }
         m_iPlayID = playView[0].m_iPreviewHandle;
-
-        PluginResult.success();
         Log.d(TAG,"NetSdk MultyPlay success!!!");
     }
 
