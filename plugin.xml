@@ -129,6 +129,7 @@
 
       <!-- stdc++ libraries -->
       <framework src="libstdc++.tbd"/>
+      <framework src="libstdc++.6.tbd"/>
 
       <!-- iOS Frameworks -->
       <framework src="AVFoundation.framework"/>
