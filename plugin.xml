@@ -83,4 +83,66 @@
 		
 	   <!-- add the otheer source files here -->
    </platform>      
-  </plugin>      
+
+  <!-- ios -->
+  <platform name="ios">
+      <config-file target="config.xml" parent="/widget">
+          <feature name="IPCamView">
+              <param name="ios-package" value="IPCamView" />
+          </feature>
+      </config-file>
+
+      <source-file src="src/ios/IPCamView.m" />
+      <source-file src="src/ios/CameraViewController.mm" />
+      <source-file src="src/ios/DeviceInfo.m" />
+      <source-file src="src/ios/IOSPlayM4.h" />
+      <source-file src="src/ios/Preview.mm" />
+      <source-file src="src/ios/CameraViewController.xib" />
+      <source-file src="src/ios/EzvizTrans.h" />
+      <source-file src="src/ios/CameraViewController.h" />
+      <source-file src="src/ios/DeviceInfo.h" />
+      <source-file src="src/ios/HikDec.h" />
+      <source-file src="src/ios/Preview.h" />
+      <source-file src="src/ios/hcnetsdk.h" />
+
+      <!-- Custom Framworks -->
+
+      <!--
+      // By some reason link stage fails because the linker cannot find the desired libraries.
+      <framework src="src/ios/SDK/Release-iphoneos/libAudioEngine_64.a" custom="true"/>
+      <framework src="src/ios/SDK/Release-iphoneos/libHCCore.a" custom="true"/>
+      <framework src="src/ios/SDK/Release-iphoneos/libHCNetSDK.a" custom="true"/>
+      <framework src="src/ios/SDK/Release-iphoneos/libSystemTransform.a" custom="true"/>
+      <framework src="src/ios/SDK/Release-iphoneos/libopensslwrap.a" custom="true"/>
+      <framework src="src/ios/SDK/Release-iphoneos/libplayctrl.a" custom="true"/>
+      -->
+
+      <source-file src="src/ios/SDK/Release-iphoneos/libAudioEngine_64.a" framework="true" />
+      <source-file src="src/ios/SDK/Release-iphoneos/libHCCore.a" framework="true" />
+      <source-file src="src/ios/SDK/Release-iphoneos/libHCNetSDK.a" framework="true" />
+      <source-file src="src/ios/SDK/Release-iphoneos/libSystemTransform.a" framework="true" />
+      <source-file src="src/ios/SDK/Release-iphoneos/libopensslwrap.a" framework="true" />
+      <source-file src="src/ios/SDK/Release-iphoneos/libplayctrl.a" framework="true" />
+
+      <!-- libiconv -->
+      <framework src="libiconv.tbd"/>
+
+      <!-- stdc++ libraries -->
+      <framework src="libstdc++.tbd"/>
+
+      <!-- iOS Frameworks -->
+      <framework src="AVFoundation.framework"/>
+      <framework src="OpenAL.framework"/>
+      <framework src="CoreFoundation.framework"/>
+      <framework src="CoreVideo.framework"/>
+      <framework src="CoreMedia.framework"/>
+      <framework src="GLKit.framework"/>
+      <framework src="VideoToolbox.framework"/>
+      <framework src="UIKit.framework"/>
+      <framework src="Foundation.framework"/>
+      <framework src="CoreGraphics.framework"/>
+      <framework src="OpenGLES.framework"/>
+      <framework src="QuartzCore.framework"/>
+
+  </platform>
+  </plugin>
