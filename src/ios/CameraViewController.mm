@@ -65,12 +65,27 @@ CameraViewController *g_pController = NULL;
     stopPreview(0);
      m_bPreview = false;
     [self dismissViewControllerAnimated:YES completion:nil];
+
+    CDVInvokedUrlCommand* command = self.command;
+    CDVPlugin* plugin = self.plugin;
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"BACK"];
+    
+    [plugin.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self cameraLogin];
+    if (![self cameraLogin]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+
+        CDVInvokedUrlCommand* command = self.command;
+        CDVPlugin* plugin = self.plugin;
+        CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"LOGIN_FAILED"];
+        
+        [plugin.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+        return;
+    }
     
     if (self.view.bounds.size.height > self.view.bounds.size.width) {
         self.camerViewHeight.constant = (self.view.frame.size.width / 4) * 3;
@@ -84,6 +99,7 @@ CameraViewController *g_pController = NULL;
     [self.view layoutIfNeeded];
 
     //layout
+    return;
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
@@ -118,7 +134,7 @@ CameraViewController *g_pController = NULL;
 
 //MARK: Login
 
-- (void)cameraLogin {
+- (bool)cameraLogin {
     
     // init
     BOOL bRet = NET_DVR_Init();
@@ -134,7 +150,10 @@ CameraViewController *g_pController = NULL;
     if([self loginNormalDevice])
     {
         [self loadPlayer];
+        return true;
     }
+    
+    return false;
 }
 
 
@@ -154,7 +173,6 @@ CameraViewController *g_pController = NULL;
     NSString * port = self.port;
     NSString * usrName = self.user;
     NSString * password = self.pass;
-
     
     DeviceInfo *deviceInfo = [[DeviceInfo alloc] init];
     deviceInfo.chDeviceAddr = iP;
@@ -181,6 +199,7 @@ CameraViewController *g_pController = NULL;
     // login on failed
     if (_m_lUserID == -1)
     {
+        /*
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle:kWarningTitle
                               message:kLoginDeviceFailMsg
@@ -188,6 +207,7 @@ CameraViewController *g_pController = NULL;
                               cancelButtonTitle:kWarningConfirmButton
                               otherButtonTitles:nil];
         [alert show];
+        */ 
         return false;
     }
     

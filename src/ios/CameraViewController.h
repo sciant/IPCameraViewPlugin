@@ -6,6 +6,7 @@
 //
 //
 
+#import <Cordova/CDV.h>
 #import <UIKit/UIKit.h>
 
 @interface CameraViewController : UIViewController
@@ -27,6 +28,8 @@
 @property NSString* port;
 @property NSString* user;
 @property NSString* pass;
+@property CDVPlugin* plugin;
+@property CDVInvokedUrlCommand* command;
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 
 @end
