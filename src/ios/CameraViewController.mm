@@ -99,7 +99,24 @@ CameraViewController *g_pController = NULL;
     [self.view layoutIfNeeded];
 
     //layout
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenLocked) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    
+    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(screenLocked) name:UIApplicationWillResignActiveNotification object:nil];
+    
     return;
+}
+
+-(void)screenLocked{
+    stopPreview(0);
+    m_bPreview = false;
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    CDVInvokedUrlCommand* command = self.command;
+    CDVPlugin* plugin = self.plugin;
+    CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"BACK"];
+    
+    [plugin.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
