@@ -22,7 +22,13 @@ public class PlayerStarter implements Runnable {
                 idle = false;
                 Intent intent = cameraPlayer.getIntent();
                 String host = intent.getStringExtra("host");
-                int port = intent.getIntExtra("port", 8000);
+                String portStr = intent.getStringExtra("port");
+                int port = -1;
+                try {
+                    port = Integer.valueOf(portStr.trim());
+                } catch (Exception e) {
+                    Log.d(TAG, "Connection port is not an integer: " + port);
+                }
                 String user = intent.getStringExtra("user");
                 String pass = intent.getStringExtra("pass");
                 cameraPlayer.play(host, port, user, pass);
